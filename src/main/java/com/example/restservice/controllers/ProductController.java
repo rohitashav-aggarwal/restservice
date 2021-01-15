@@ -11,17 +11,17 @@ import java.util.concurrent.atomic.AtomicLong;
 @RestController
 public class ProductController {
 
-    private final AtomicLong counter = new AtomicLong();
-    private final ArrayList<Product> productsList = new ArrayList<>();
+    private  ArrayList<Product> productsList;
 
     @GetMapping("/products")
     public List<Product> product (){
+        productsList = new ArrayList<>();
         // add sample products to the arraylist
-        productsList.add(new Product(counter.incrementAndGet(), "Water Bottle"));
-        productsList.add(new Product(counter.incrementAndGet(), "Pillow"));
-        productsList.add(new Product(counter.incrementAndGet(), "Camping Tent"));
-        productsList.add(new Product(counter.incrementAndGet(), "Blanket"));
-        productsList.add(new Product(counter.incrementAndGet(), "Bear Spray"));
+        productsList.add(new Product(1, "Water Bottle"));
+        productsList.add(new Product(2, "Pillow"));
+        productsList.add(new Product(3, "Camping Tent"));
+        productsList.add(new Product(4, "Blanket"));
+        productsList.add(new Product(5, "Bear Spray"));
         return productsList;
     }
 }
