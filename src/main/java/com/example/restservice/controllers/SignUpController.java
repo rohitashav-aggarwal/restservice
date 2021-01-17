@@ -1,8 +1,7 @@
 package com.example.restservice.controllers;
 
-import com.example.restservice.resources.SignUp;
-import com.example.restservice.services.DataStorage;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.restservice.resources.User;
+import com.example.restservice.services.AuthService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,18 +13,18 @@ import java.util.logging.Logger;
 @RestController
 public class SignUpController {
 
-    private final DataStorage dataStorage;
+    private final AuthService authService;
     private static final Logger logger = Logger.getLogger("SignUpController.class");
 
-    public SignUpController(DataStorage dataStorage) {
-        this.dataStorage = dataStorage;
+    public SignUpController(AuthService authService) {
+        this.authService = authService;
     }
 
     @PostMapping("/signup")
-    public void signUpUser(@ModelAttribute SignUp signUp, BindingResult result) throws IOException {
+    public void signUpUser(@ModelAttribute User user, BindingResult result) throws IOException {
         if(result.hasErrors()){
             logger.info(result.toString());
         }
-        dataStorage.writeToFile(signUp.getUsername(), signUp.getPassword());
+        authService.writeToFile(user.getUsername(), user.getPassword());
     }
 }

@@ -1,7 +1,7 @@
 package com.example.restservice.controllers;
 
-import com.example.restservice.resources.SignUp;
-import com.example.restservice.services.DataStorage;
+import com.example.restservice.resources.User;
+import com.example.restservice.services.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -14,19 +14,19 @@ import java.util.logging.Logger;
 @RestController
 public class LogInController {
 
-    private final DataStorage dataStorage;
+    private final AuthService authService;
     private static final Logger logger = Logger.getLogger("LogInController.class");
 
-    public LogInController(DataStorage dataStorage) {
-        this.dataStorage = dataStorage;
+    public LogInController(AuthService authService) {
+        this.authService = authService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity sendViaResponseEntity(@ModelAttribute SignUp signUp, BindingResult result) {
+    public ResponseEntity sendViaResponseEntity(@ModelAttribute User user, BindingResult result) {
         if(result.hasErrors()){
             logger.info(result.toString());
         }
-        if(dataStorage.userExists(signUp.getUsername(), signUp.getPassword())){
+        if(authService.userExists(user.getUsername(), user.getPassword())){
             logger.info("login successful");
             return new ResponseEntity(HttpStatus.OK);
         }else{

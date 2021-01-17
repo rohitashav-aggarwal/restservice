@@ -1,11 +1,11 @@
 package com.example.restservice.resources;
 
-public class SignUp {
+public class User {
 
     private String username;
     private String password;
 
-    public SignUp(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }

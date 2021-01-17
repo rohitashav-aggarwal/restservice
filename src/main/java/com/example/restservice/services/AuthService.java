@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.Scanner;
 
 @Component
-public class DataStorage {
+public class AuthService {
 
     public void writeToFile(String username, String password) throws IOException {
         BufferedWriter out = new BufferedWriter(new FileWriter("file.txt", true));
